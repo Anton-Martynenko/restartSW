@@ -3,10 +3,14 @@
     background-color: chartreuse;
 }
 
-.item {
+/*.item {
+    color: white;
+}*/
+
+.item a {
     color: white;
 }
 
-.item.active {
-    color: darkgoldenrod;
+.item a activeLink {
+    color: yellow;
 }
