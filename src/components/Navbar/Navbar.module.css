@@ -7,10 +7,10 @@
     color: white;
 }*/
 
-.item a {
-    color: white;
+.item a{
+    color: yellow;
 }
 
-.item a activeLink {
-    color: yellow;
+.item a.activeLink {
+    color: black;
 }
