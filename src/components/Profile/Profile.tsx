@@ -16,10 +16,10 @@ export type PostPropsType = {
 
 const Profile = (props: ProfilePageType) => {
 
-    let posts = [
+    /*let posts = [
         {id: 1, message: 'Hello!', likesCount: 27},
         {id: 2, message: 'My first post', likesCount: 5}
-    ]
+    ]*/
 
     return <div className={s.content}>
         <ProfileInfo />
