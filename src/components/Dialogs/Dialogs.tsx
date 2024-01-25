@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import s from "./Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
@@ -28,6 +28,12 @@ const Dialogs = (props: DialogPageType) => {
 
     let messagesElements = props.messages ? props.messages.map(m => <Message message={m.message} />) : '';
 
+    let newMessageText = useRef<any>();
+    let addMessageElement = () => {
+        let message = newMessageText.current.value;
+        alert(message);
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -35,6 +41,12 @@ const Dialogs = (props: DialogPageType) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
+                <div>
+                    <textarea ref={newMessageText}></textarea>
+                </div>
+                <div>
+                    <button onClick={addMessageElement}>Add message</button>
+                </div>
             </div>
         </div>
     )
