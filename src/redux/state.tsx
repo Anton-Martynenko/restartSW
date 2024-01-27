@@ -1,8 +1,10 @@
 import React from "react";
 
+
+
 export type DialogsType = {
     id?: number,
-    name?: string
+    name: string
 }
 
 export type MessagesType = {
@@ -16,17 +18,62 @@ export type PostsType = {
 }
 
 export type ProfilePageType = {
-    posts?: Array<PostsType>
+    posts: Array<PostsType>
+    /*addPost?: (newMessage: string) => void*/
+}
+
+export type ProfileType = {
+    posts: Array<PostsType>
+    addPost: (newMessage: string) => void
 }
 
 export type DialogPageType = {
-    dialogs?: Array<DialogsType>
-    messages?: Array<MessagesType>
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
 }
 
 export type StateType = {
-    dialogPage?: DialogPageType
-    profilePage?: ProfilePageType
+    dialogPage: DialogPageType
+    profilePage: ProfilePageType
+    /*addPost?: (newMessage: string) => void*/
+}
+
+export type RootStateType = {
+    state: {
+        dialogPage: {
+            dialogs: Array<DialogsType>
+            messages: Array<MessagesType>
+        }
+        profilePage: {
+            posts: Array<PostsType>
+        }
+    }
+
+}
+
+export type AllType = {
+    state: {
+        dialogPage: {
+            dialogs: Array<DialogsType>
+            messages: Array<MessagesType>
+        }
+        profilePage: {
+            posts: Array<PostsType>
+        }
+    }
+    addPost: (newMessage: string) => void
+}
+
+export const addPost = (newMessage: string) => {
+    debugger;
+    let newPost: PostsType = {
+        id: 5,
+        message: newMessage,
+        likesCount: 0
+    };
+
+    state.profilePage.posts.push(newPost);
+    renderEntireTree(state);
 }
 
 let state = {
@@ -51,6 +98,14 @@ let state = {
             {id: 2, message: 'My first post', likesCount: 5}
         ]
     }
+}
+
+let renderEntireTree = (state: StateType) => {
+    console.log('State Changed')
+}
+
+export const subscribe = (observer: any) => {
+    renderEntireTree = observer;
 }
 
 export default state;
