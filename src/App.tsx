@@ -20,7 +20,8 @@ const App = (props: AllType) => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogPage.dialogs}
-                                                                   messages={props.state.dialogPage.messages}/>}/>
+                                                                   messages={props.state.dialogPage.messages}
+                                                                   addMessage={props.addMessage}/>}/>
                         <Route path='/profile' element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>

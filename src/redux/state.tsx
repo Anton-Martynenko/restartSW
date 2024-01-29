@@ -1,13 +1,12 @@
 import React from "react";
 
-
-
 export type DialogsType = {
     id?: number,
     name: string
 }
 
 export type MessagesType = {
+    id: number
     message: string
 }
 
@@ -30,6 +29,12 @@ export type ProfileType = {
 export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+}
+
+export type DialogType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    addMessage: (newMessage: string) => void
 }
 
 export type StateType = {
@@ -62,10 +67,11 @@ export type AllType = {
         }
     }
     addPost: (newMessage: string) => void
+    addMessage: (newMessage: string) => void
 }
 
 export const addPost = (newMessage: string) => {
-    debugger;
+
     let newPost: PostsType = {
         id: 5,
         message: newMessage,
@@ -73,6 +79,17 @@ export const addPost = (newMessage: string) => {
     };
 
     state.profilePage.posts.push(newPost);
+    renderEntireTree(state);
+}
+
+export const addMessage = (newMessage: string) => {
+
+    let newMessageText: MessagesType = {
+        id: 5,
+        message: newMessage
+    };
+
+    state.dialogPage.messages.push(newMessageText);
     renderEntireTree(state);
 }
 

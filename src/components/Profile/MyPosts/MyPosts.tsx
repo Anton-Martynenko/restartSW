@@ -1,19 +1,9 @@
-import React, {forwardRef, useRef} from 'react';
+import React from 'react';
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {PostsType, ProfilePageType, ProfileType} from "../../../redux/state";
-
-type MyPostType = {
-    posts: Array<PostsType>
-    addPost?: (newMessage: string) => void
-}
+import {ProfileType} from "../../../redux/state";
 
 const MyPosts = (props: ProfileType) => {
-
-    /*let posts = [
-        {id: 1, message: 'Hello!', likesCount: 27},
-        {id: 2, message: 'My first post', likesCount: 5}
-    ]*/
 
     let postsElements = props.posts ? props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>) : '';
     let newPostText = React.createRef<HTMLTextAreaElement>();
