@@ -22,7 +22,10 @@ const App = (props: AllType) => {
                         <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogPage.dialogs}
                                                                    messages={props.state.dialogPage.messages}
                                                                    addMessage={props.addMessage}/>}/>
-                        <Route path='/profile' element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>}/>
+                        <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
+                                                                 addPost={props.addPost}
+                                                                 newPost={props.state.profilePage.newPost}
+                                                                 updateNewPostText={props.updateNewPostText}/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>

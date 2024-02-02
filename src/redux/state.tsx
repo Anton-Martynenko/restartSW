@@ -18,12 +18,15 @@ export type PostsType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
+    newPost: string
     /*addPost?: (newMessage: string) => void*/
 }
 
 export type ProfileType = {
     posts: Array<PostsType>
+    newPost: string
     addPost: (newMessage: string) => void
+    updateNewPostText: (newPost: string) => void
 }
 
 export type DialogPageType = {
@@ -51,6 +54,7 @@ export type RootStateType = {
         }
         profilePage: {
             posts: Array<PostsType>
+            newPost: string
         }
     }
 
@@ -64,17 +68,19 @@ export type AllType = {
         }
         profilePage: {
             posts: Array<PostsType>
+            newPost: string
         }
     }
     addPost: (newMessage: string) => void
     addMessage: (newMessage: string) => void
+    updateNewPostText: (newPost: string) => void
 }
 
 export const addPost = (newMessage: string) => {
 
     let newPost: PostsType = {
         id: 5,
-        message: newMessage,
+        message: state.profilePage.newPost,
         likesCount: 0
     };
 
@@ -90,6 +96,11 @@ export const addMessage = (newMessage: string) => {
     };
 
     state.dialogPage.messages.push(newMessageText);
+    renderEntireTree(state);
+}
+
+export const updateNewPostText = (newPost: string) => {
+    state.profilePage.newPost = newPost;
     renderEntireTree(state);
 }
 
@@ -113,7 +124,8 @@ let state = {
         posts: [
             {id: 1, message: 'Hello!', likesCount: 27},
             {id: 2, message: 'My first post', likesCount: 5}
-        ]
+        ],
+        newPost: ""
     }
 }
 
