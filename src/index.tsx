@@ -8,30 +8,30 @@ import state, {
     addPost,
     AllType,
     RootStateType,
-    StateType,
+    StateType, store,
     subscribe,
     updateNewPostText
 } from "./redux/state";
 
 
-export const renderEntireTree = (state: StateType) => {
+export const renderEntireTree = (state: RootStateType) => {
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
     );
     root.render(
         <React.StrictMode>
-            <App state={state}
-                 addPost={addPost}
-                 addMessage={addMessage}
-                 updateNewPostText={updateNewPostText}/>
+            <App state={store.getState()}
+                 addPost={store.addPost.bind(store)}
+                 addMessage={store.addMessage.bind(store)}
+                 updateNewPostText={store.updateNewPostText.bind(store)}/>
         </React.StrictMode>
     );
 
     reportWebVitals();
 }
 
-renderEntireTree(state);
-subscribe(renderEntireTree);
+renderEntireTree(store.getState());
+store.subscribe(renderEntireTree);
 
 /*const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
