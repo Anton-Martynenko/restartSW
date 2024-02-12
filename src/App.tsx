@@ -8,13 +8,22 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {AllType, RootStateType, StateType, store, StoreType} from "./redux/state";
+import {
+    AddPostActionType,
+    AllType,
+    RootStateType,
+    StateType,
+    store,
+    StoreType,
+    UpdateNewPostTextType
+} from "./redux/state";
 
 type AppPropsType = {
     state: RootStateType
-    addPost: (newMessage: string) => void
+    /*addPost: (newMessage: string) => void*/
     addMessage: (newMessage: string) => void
-    updateNewPostText: (newPost: string) => void
+    /*updateNewPostText: (newPost: string) => void*/
+    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -29,11 +38,12 @@ const App = (props: AppPropsType) => {
                     <Routes>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogPage.dialogs}
                                                                    messages={props.state.dialogPage.messages}
-                                                                   addMessage={props.addMessage.bind(store)}/>}/>
+                                                                   addMessage={props.addMessage}/>}/>
                         <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
-                                                                 addPost={props.addPost}
+                                                                 dispatch={props.dispatch}
+                                                                 /*addPost={props.addPost}*/
                                                                  newPost={props.state.profilePage.newPost}
-                                                                 updateNewPostText={props.updateNewPostText}/>}/>
+                                                                 /*updateNewPostText={props.updateNewPostText}*//>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>

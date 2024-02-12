@@ -25,8 +25,9 @@ export type ProfilePageType = {
 export type ProfileType = {
     posts: Array<PostsType>
     newPost: string
-    addPost: (newMessage: string) => void
-    updateNewPostText: (newPost: string) => void
+    /*addPost: (newMessage: string) => void
+    updateNewPostText: (newPost: string) => void*/
+    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
 }
 
 export type DialogPageType = {
@@ -78,12 +79,23 @@ export type AllType = {
 
 export type StoreType = {
     state: RootStateType
-    addPost: (newMessage: string) => void
+    /*addPost: (newMessage: string) => void*/
     addMessage: (newMessage: string) => void
-    updateNewPostText: (newPost: string) => void
+    /*updateNewPostText: (newPost: string) => void*/
     subscribe: (observer: () => void) => void
     renderEntireTree: () => void
     getState: () => RootStateType
+    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
+}
+
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    /*newPost: string*/
+}
+
+export type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newPost: string
 }
 
 export const addPost = (newMessage: string) => {
@@ -142,17 +154,17 @@ export const store = {
     renderEntireTree (state: StateType) {
         console.log('State Changed')
     },
-    addPost (newMessage: string) {
+    /*addPost (newMessage: string) {
 
         let newPost: PostsType = {
             id: 5,
-            message: this.state.profilePage.newPost,
+            message: newMessage/!*this.state.profilePage.newPost*!/,
             likesCount: 0
         };
 
         this.state.profilePage.posts.push(newPost);
         this.renderEntireTree(this.state);
-    },
+    },*/
     addMessage (newMessage: string) {
 
         let newMessageText: MessagesType = {
@@ -163,15 +175,31 @@ export const store = {
         this.state.dialogPage.messages.push(newMessageText);
         this.renderEntireTree(this.state);
     },
-    updateNewPostText (newPost: string) {
+    /*updateNewPostText (newPost: string) {
         this.state.profilePage.newPost = newPost;
         this.renderEntireTree(this.state);
-    },
+    },*/
     subscribe (observer: any) {
         this.renderEntireTree = observer;
     },
     getState () {
         return this.state;
+    },
+    dispatch (action: any) {
+
+        if (action.type === 'ADD-POST') {
+            let newPost: PostsType = {
+                id: 5,
+                message: /*action.newPost*/ this.state.profilePage.newPost,
+                likesCount: 0
+            };
+
+            this.state.profilePage.posts.push(newPost);
+            this.renderEntireTree(this.state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this.state.profilePage.newPost = action.newPost;
+            this.renderEntireTree(this.state);
+        }
     }
 }
 

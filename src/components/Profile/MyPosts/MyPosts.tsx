@@ -8,7 +8,9 @@ const MyPosts = (props: ProfileType) => {
     let postsElements = props.posts ? props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>) : '';
     /*let newPostText = React.createRef<HTMLTextAreaElement>();*/
     let addPostElement = () => {
-        props.addPost(props.newPost);
+
+        /*props.addPost(props.newPost);*/
+        props.dispatch({type: 'ADD-POST'/*, newPost: props.newPost*/})
         /*if (newPostText.current) {
             props.addPost(newPostText.current.value);
             props.updateNewPostText('');
@@ -17,7 +19,8 @@ const MyPosts = (props: ProfileType) => {
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        /*props.updateNewPostText(e.currentTarget.value)*/
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newPost: e.currentTarget.value})
         /*if (newPostText.current) {
             props.updateNewPostText(newPostText.current.value);
         }*/
