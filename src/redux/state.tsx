@@ -1,7 +1,9 @@
 import React from "react";
+import {profileReducer} from "./profileReducer";
+import {dialogsReducer} from "./dialogsReducer";
 
 export type DialogsType = {
-    id?: number,
+    id: number,
     name: string
 }
 
@@ -27,18 +29,22 @@ export type ProfileType = {
     newPost: string
     /*addPost: (newMessage: string) => void
     updateNewPostText: (newPost: string) => void*/
-    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessage: string
+
 }
 
 export type DialogType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    addMessage: (newMessage: string) => void
+    /*addMessage: (newMessage: string) => void*/
+    newMessage: string
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type StateType = {
@@ -52,6 +58,7 @@ export type RootStateType = {
         dialogPage: {
             dialogs: Array<DialogsType>
             messages: Array<MessagesType>
+            newMessage: string
         }
         profilePage: {
             posts: Array<PostsType>
@@ -80,13 +87,18 @@ export type AllType = {
 export type StoreType = {
     state: RootStateType
     /*addPost: (newMessage: string) => void*/
-    addMessage: (newMessage: string) => void
+    /*addMessage: (newMessage: string) => void*/
     /*updateNewPostText: (newPost: string) => void*/
     subscribe: (observer: () => void) => void
     renderEntireTree: () => void
     getState: () => RootStateType
-    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
+    dispatch: (action: ActionsTypes) => void
 }
+
+export type ActionsTypes = AddPostActionType |
+    UpdateNewPostTextType |
+    AddMessageActionType |
+    UpdateNewDialogMessageActionType
 
 export type AddPostActionType = {
     type: 'ADD-POST'
@@ -98,15 +110,37 @@ export type UpdateNewPostTextType = {
     newPost: string
 }
 
-export const addPostActionCreator = (): AddPostActionType => {
+export type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+    newMessage: string
+}
+
+export type UpdateNewDialogMessageActionType = {
+    type: 'UPDATE-NEW-DIALOG-MESSAGE'
+    newMessage: string
+}
+
+/*export const addPostActionCreator = (): AddPostActionType => {
     return {
         type: "ADD-POST"
     } as const
-};
+};*/
 
-export const updateNewPostTextActionCreator = (newPost: string): UpdateNewPostTextType => {
+/*export const addMessageActionCreator = (newMessage: string): AddMessageActionType => {
+    return {
+        type: 'ADD-MESSAGE', newMessage: newMessage
+    } as const
+}*/
+
+/*export const updateNewPostTextActionCreator = (newPost: string): UpdateNewPostTextType => {
     return {type: 'UPDATE-NEW-POST-TEXT', newPost: newPost} as const
-};
+};*/
+
+/*export const updateNewDialogMessageActionCreator = (newMessage: string): UpdateNewDialogMessageActionType => {
+    return {
+        type: 'UPDATE-NEW-DIALOG-MESSAGE', newMessage: newMessage
+    } as const
+}*/
 
 export const addPost = (newMessage: string) => {
 
@@ -151,7 +185,8 @@ export const store = {
                 {id: 2, message: 'How is your it-kamasutra?'},
                 {id: 3, message: 'Yo!'},
                 {id: 4, message: 'Yo!Yo!'}
-            ]
+            ],
+            newMessage: ""
         },
         profilePage: {
             posts: [
@@ -175,7 +210,7 @@ export const store = {
         this.state.profilePage.posts.push(newPost);
         this.renderEntireTree(this.state);
     },*/
-    addMessage (newMessage: string) {
+    /*addMessage (newMessage: string) {
 
         let newMessageText: MessagesType = {
             id: 5,
@@ -184,7 +219,7 @@ export const store = {
 
         this.state.dialogPage.messages.push(newMessageText);
         this.renderEntireTree(this.state);
-    },
+    },*/
     /*updateNewPostText (newPost: string) {
         this.state.profilePage.newPost = newPost;
         this.renderEntireTree(this.state);
@@ -197,19 +232,35 @@ export const store = {
     },
     dispatch (action: any) {
 
-        if (action.type === 'ADD-POST') {
+        this.state.profilePage = profileReducer(this.state.profilePage, action);
+        this.state.dialogPage = dialogsReducer(this.state.dialogPage, action);
+        this.renderEntireTree(this.state);
+
+        /*if (action.type === 'ADD-POST') {
             let newPost: PostsType = {
                 id: 5,
-                message: /*action.newPost*/ this.state.profilePage.newPost,
+                message: /!*action.newPost*!/ this.state.profilePage.newPost,
                 likesCount: 0
             };
 
             this.state.profilePage.posts.push(newPost);
+            this.state.profilePage.newPost = '';
             this.renderEntireTree(this.state);
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this.state.profilePage.newPost = action.newPost;
             this.renderEntireTree(this.state);
-        }
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage: MessagesType = {
+                id: 10,
+                message: action.newMessage
+            }
+            this.state.dialogPage.messages.push(newMessage);
+            this.state.dialogPage.newMessage = '';
+            this.renderEntireTree(this.state);
+        } else if (action.type === 'UPDATE-NEW-DIALOG-MESSAGE') {
+            this.state.dialogPage.newMessage = action.newMessage;
+            this.renderEntireTree(this.state)
+        }*/
     }
 }
 

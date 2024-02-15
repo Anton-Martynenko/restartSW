@@ -9,6 +9,7 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {
+    ActionsTypes,
     AddPostActionType,
     AllType,
     RootStateType,
@@ -21,9 +22,9 @@ import {
 type AppPropsType = {
     state: RootStateType
     /*addPost: (newMessage: string) => void*/
-    addMessage: (newMessage: string) => void
+    /*addMessage: (newMessage: string) => void*/
     /*updateNewPostText: (newPost: string) => void*/
-    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -38,7 +39,9 @@ const App = (props: AppPropsType) => {
                     <Routes>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogPage.dialogs}
                                                                    messages={props.state.dialogPage.messages}
-                                                                   addMessage={props.addMessage}/>}/>
+                                                                   newMessage={props.state.dialogPage.newMessage}
+                                                                   dispatch={props.dispatch}
+                                                                   /*addMessage={props.addMessage}*//>}/>
                         <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
                                                                  dispatch={props.dispatch}
                                                                  /*addPost={props.addPost}*/
