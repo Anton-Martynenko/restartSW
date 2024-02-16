@@ -8,7 +8,15 @@ import {
     UpdateNewPostTextType
 } from "./state";
 
-export const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+let initialState = {
+    posts: [
+        {id: 1, message: 'Hello!', likesCount: 27},
+        {id: 2, message: 'My first post', likesCount: 5}
+    ],
+    newPost: ""
+}
+
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostsType = {

@@ -8,13 +8,14 @@ import state, {
     addPost,
     AllType,
     RootStateType,
-    StateType, store,
+    StateType,
     subscribe,
     updateNewPostText
 } from "./redux/state";
+import store, {RootReducerType} from "./redux/reduxStore";
 
 
-export const renderEntireTree = (state: RootStateType) => {
+export const renderEntireTree = (state: RootReducerType) => {
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
     );
@@ -32,7 +33,10 @@ export const renderEntireTree = (state: RootStateType) => {
 }
 
 renderEntireTree(store.getState());
-store.subscribe(renderEntireTree);
+store.subscribe(() => {
+    let state = store.getState();
+    renderEntireTree(state);
+});
 
 /*const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
