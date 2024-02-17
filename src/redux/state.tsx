@@ -32,6 +32,14 @@ export type ProfileType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+export type MyPostsType = {
+    posts: Array<PostsType>
+    newPost: string
+    addPost: (newMessage: string) => void
+    updateNewPostText: (newPost: string) => void
+    /*dispatch: (action: ActionsTypes) => void*/
+}
+
 export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
