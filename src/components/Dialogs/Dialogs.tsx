@@ -5,12 +5,12 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
     addMessage,
-    DialogPageType,
+    DialogPageType, DialogPresentationType,
     DialogType,
 } from "../../redux/state";
 import {addMessageActionCreator, updateNewDialogMessageActionCreator} from "../../redux/dialogsReducer";
 
-const Dialogs = (props: DialogType) => {
+const Dialogs = (props: DialogPresentationType) => {
 
     let dialogsElements = props.dialogs ? props.dialogs.map(d => <DialogItem id={d.id} name={d.name} />) : '';
 
@@ -21,14 +21,15 @@ const Dialogs = (props: DialogType) => {
         /*let message = newMessageText.current.value;
         alert(message);*/
         /*if (newMessageText.current) {*/
-            /*props.addMessage(newMessageText.current.value);*/
-            props.dispatch(addMessageActionCreator(props.newMessage))
-        /*}*/
+            props.addMessage(props.newMessage);
+            /*props.dispatch(addMessageActionCreator(props.newMessage))*/
     }
 
-    let updateNewDialogMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    let updateNewMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         /*if (newMessageText.current) {*/
-            props.dispatch(updateNewDialogMessageActionCreator(e.currentTarget.value))
+            props.updateMessage(e.currentTarget.value);
+        /*}*/
+            /*props.dispatch(updateNewDialogMessageActionCreator(e.currentTarget.value))*/
         /*}*/
     }
 
@@ -40,9 +41,10 @@ const Dialogs = (props: DialogType) => {
             <div className={s.messages}>
                 {messagesElements}
                 <div>
-                    <textarea /*ref={newMessageText}*/ onChange={updateNewDialogMessage}
-                                                       value={props.newMessage}
-                                                       placeholder={'Enter your message'}></textarea>
+                    <textarea /*ref={newMessageText}*/
+                              onChange={updateNewMessage}
+                              value={props.newMessage}
+                              placeholder={'Enter your message'} />
                 </div>
                 <div>
                     <button onClick={addMessageElement}>Add message</button>

@@ -18,6 +18,7 @@ import {
     StoreType,
     UpdateNewPostTextType
 } from "./redux/state";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     state: RootStateType
@@ -37,7 +38,7 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/dialogs/*' element={<Dialogs dialogs={props.state.dialogPage.dialogs}
+                        <Route path='/dialogs/*' element={<DialogsContainer dialogs={props.state.dialogPage.dialogs}
                                                                    messages={props.state.dialogPage.messages}
                                                                    newMessage={props.state.dialogPage.newMessage}
                                                                    dispatch={props.dispatch}

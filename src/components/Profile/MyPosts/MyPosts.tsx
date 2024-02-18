@@ -21,7 +21,8 @@ const MyPosts = (props: MyPostsType) => {
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewPostText(e.currentTarget.value)
-        /*props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value)*//*{type: 'UPDATE-NEW-POST-TEXT', newPost: e.currentTarget.value}*/
+        /*props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value)*/
+        /*{type: 'UPDATE-NEW-POST-TEXT', newPost: e.currentTarget.value}*/
         /*if (newPostText.current) {
             props.updateNewPostText(newPostText.current.value);
         }*/

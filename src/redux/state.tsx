@@ -55,6 +55,14 @@ export type DialogType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+export type DialogPresentationType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    addMessage: (newMessage: string) => void
+    updateMessage: (newMessage: string) => void
+    newMessage: string
+}
+
 export type StateType = {
     dialogPage: DialogPageType
     profilePage: ProfilePageType
