@@ -28,7 +28,7 @@ type AppPropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-const App = (props: AppPropsType) => {
+const App = (/*AppPropsType*/) => {
 
     return (
         <BrowserRouter>
@@ -38,15 +38,15 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/dialogs/*' element={<DialogsContainer dialogs={props.state.dialogPage.dialogs}
+                        <Route path='/dialogs/*' element={<DialogsContainer /*dialogs={props.state.dialogPage.dialogs}
                                                                    messages={props.state.dialogPage.messages}
                                                                    newMessage={props.state.dialogPage.newMessage}
-                                                                   dispatch={props.dispatch}
+                                                                   dispatch={props.dispatch}*/
                                                                    /*addMessage={props.addMessage}*//>}/>
-                        <Route path='/profile' element={<Profile posts={props.state.profilePage.posts}
-                                                                 dispatch={props.dispatch}
+                        <Route path='/profile' element={<Profile /*posts={props.state.profilePage.posts}
+                                                                 dispatch={props.dispatch}*/
                                                                  /*addPost={props.addPost}*/
-                                                                 newPost={props.state.profilePage.newPost}
+                                                                 /*newPost={props.state.profilePage.newPost}*/
                                                                  /*updateNewPostText={props.updateNewPostText}*//>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>

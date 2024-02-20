@@ -13,6 +13,7 @@ import state, {
     updateNewPostText
 } from "./redux/state";
 import store, {RootReducerType} from "./redux/reduxStore";
+import StoreContext from "./StoreContext";
 
 
 export const renderEntireTree = (state: RootReducerType) => {
@@ -20,16 +21,18 @@ export const renderEntireTree = (state: RootReducerType) => {
         document.getElementById('root') as HTMLElement
     );
     root.render(
-        <React.StrictMode>
-            <App state={store.getState()}
-                 dispatch={store.dispatch.bind(store)}
+        /*<React.StrictMode>*/
+        <StoreContext.Provider value={store}>
+            <App /*state={store.getState()}
+                 dispatch={store.dispatch.bind(store)}*/
                  /*addPost={store.addPost.bind(store)}*/
                  /*addMessage={store.addMessage.bind(store)}*/
                  /*updateNewPostText={store.updateNewPostText.bind(store)}*//>
-        </React.StrictMode>
+        </StoreContext.Provider>
+        /*</React.StrictMode>*/
     );
 
-    reportWebVitals();
+    /*reportWebVitals();*/
 }
 
 renderEntireTree(store.getState());

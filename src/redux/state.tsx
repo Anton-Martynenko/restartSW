@@ -101,12 +101,12 @@ export type AllType = {
 }
 
 export type StoreType = {
-    state: RootStateType
+    /*state: RootStateType*/
     /*addPost: (newMessage: string) => void*/
     /*addMessage: (newMessage: string) => void*/
     /*updateNewPostText: (newPost: string) => void*/
     subscribe: (observer: () => void) => void
-    renderEntireTree: () => void
+    /*renderEntireTree: () => void*/
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }

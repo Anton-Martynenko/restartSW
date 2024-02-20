@@ -10,31 +10,47 @@ import {
 } from "../../redux/state";
 import {addMessageActionCreator, updateNewDialogMessageActionCreator} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
+import StoreContext from "../../StoreContext";
 
-const DialogsContainer = (props: DialogType) => {
+const DialogsContainer = (/*props: DialogType*/) => {
 
     /*let newMessageText = useRef<any>();*/
-    let addNewMessage = () => {
-        /*let message = newMessageText.current.value;
-        alert(message);*/
-        /*if (newMessageText.current) {*/
-            /*props.addMessage(newMessageText.current.value);*/
+    /*let addNewMessage = () => {
+        /!*let message = newMessageText.current.value;
+        alert(message);*!/
+        /!*if (newMessageText.current) {*!/
+            /!*props.addMessage(newMessageText.current.value);*!/
             props.dispatch(addMessageActionCreator(props.newMessage))
-        /*}*/
+        /!*}*!/
     }
 
     let updateNewDialogMessage = (newMessage: string) => {
-        /*if (newMessageText.current) {*/
+        /!*if (newMessageText.current) {*!/
             props.dispatch(updateNewDialogMessageActionCreator(newMessage))
-        /*}*/
-    }
+        /!*}*!/
+    }*/
 
     return (
-        <Dialogs dialogs={props.dialogs}
-                 messages={props.messages}
+        <StoreContext.Consumer>
+            {(store) => {
+
+                let state = store.getState();
+
+                let addNewMessage = () => {
+                    store.dispatch(addMessageActionCreator(state.dialogPage.newMessage))
+                }
+
+                let updateNewDialogMessage = (newMessage: string) => {
+                    store.dispatch(updateNewDialogMessageActionCreator(newMessage))
+                }
+        return <Dialogs dialogs={state.dialogPage.dialogs}
+                 messages={state.dialogPage.messages}
                  addMessage={addNewMessage}
                  updateMessage={updateNewDialogMessage}
-                 newMessage={props.newMessage} />
+                 newMessage={state.dialogPage.newMessage} />
+            }
+            }
+        </StoreContext.Consumer>
     )
 }
 
